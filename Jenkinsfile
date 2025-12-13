@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Code Compilation') {
             steps {
-                echo 'Starting Code Compilation...'
+                echo 'Starting Code Compilation now...'
                 sh 'mvn clean compile'
                 echo 'Code Compilation Completed Successfully!'
             }
