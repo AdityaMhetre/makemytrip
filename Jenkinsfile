@@ -1,6 +1,6 @@
 pipeline {
 
-    agent {Label: JenkinsSlaveA}
+    agent {Label: java}
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Starting Code Compilation now...'
                 sh 'mvn clean compile'
-                echo 'Code Compilation Completed Successfully time!'
+                echo 'Code Compilation Completed Successfully!'
             }
         }
         stage('Code QA Execution') {
