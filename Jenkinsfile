@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'Running JUnit Test Cases...'
                 sh 'mvn clean test'
-                echo 'JUnit Test Cases Completed Successfully!'
+                echo 'JUnit Test Cases Completed Successfully now!'
             }
         }
         stage('Code Package') {
