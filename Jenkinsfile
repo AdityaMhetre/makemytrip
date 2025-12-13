@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Starting Code Compilation...'
                 sh 'mvn clean compile'
-                echo 'Code Compilation Completed Successfully!..moving to next step'
+                echo 'Code Compilation Completed Successfully!..moving to next step now'
             }
         }
         stage('Code QA Execution') {
