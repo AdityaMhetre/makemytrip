@@ -42,7 +42,7 @@ pipeline {
         stage('Docker Image Scanning') {
                     steps {
                         echo 'Scanning Docker Image with Trivy...'
-                        sh 'trivy image makemytrip:latest || echo "Scan Failed - Proceeding with Caution"'
+                        sh 'trivy image ${DOCKER_IMAGE}:latest || echo "Scan Failed - Proceeding with Caution"'
                         echo 'Docker Image Scanning Completed!'
                     }
                 }
