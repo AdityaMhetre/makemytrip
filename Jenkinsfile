@@ -35,14 +35,14 @@ pipeline {
         stage('Build & Tag Docker Image') {
                     steps {
                         echo 'Building Docker Image with Tags...'
-                        sh "docker build -t adityamhetre/makemytrip:latest -t makemytrip:latest ."
+                        sh "docker build -t adityamhetre/makemytrip:1.1 -t makemytrip:1.1 ."
                         echo 'Docker Image Build Completed!'
                     }
         }
         stage('Docker Image Scanning') {
                     steps {
                         echo 'Scanning Docker Image with Trivy...'
-                        sh 'trivy image ${DOCKER_IMAGE}:latest || echo "Scan Failed - Proceeding with Caution"'
+                        sh 'trivy image ${DOCKER_IMAGE}:1.1 || echo "Scan Failed - Proceeding with Caution"'
                         echo 'Docker Image Scanning Completed!'
                     }
                 }
@@ -52,7 +52,7 @@ pipeline {
                             withCredentials([string(credentialsId: 'dockerhubCred', variable: 'dockerhubCred')]) {
                                 sh 'docker login docker.io -u adityamhetre -p ${dockerhubCred}'
                                 echo 'Pushing Docker Image to Docker Hub...'
-                                sh 'docker push adityamhetre/makemytrip:latest'
+                                sh 'docker push adityamhetre/makemytrip:1.1'
                                 echo 'Docker Image Pushed to Docker Hub Successfully!'
                             }
                         }
@@ -65,8 +65,8 @@ pipeline {
                                 echo 'Tagging and Pushing Docker Image to ECR...'
                                 sh '''
                                     docker images
-                                    docker tag makemytrip:latest 343474957259.dkr.ecr.ap-south-1.amazonaws.com/makemytrip:latest
-                                    docker push 343474957259.dkr.ecr.ap-south-1.amazonaws.com/makemytrip:latest
+                                    docker tag makemytrip:latest 343474957259.dkr.ecr.ap-south-1.amazonaws.com/makemytrip:1.1
+                                    docker push 343474957259.dkr.ecr.ap-south-1.amazonaws.com/makemytrip:1.1
                                 '''
                                 echo 'Docker Image Pushed to Amazon ECR Successfully!'
                             }
@@ -79,7 +79,7 @@ pipeline {
                             withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                                 sh 'docker login http://65.1.13.88:8085/repository/makemytrip/ -u admin -p ${PASSWORD}'
                                 echo "Push Docker Image to Nexus : In Progress"
-                                sh 'docker tag makemytrip 65.1.13.88:8085/makemytrip:latest'
+                                sh 'docker tag makemytrip 65.1.13.88:8085/makemytrip:1.1'
                                 sh 'docker push 65.1.13.88:8085/makemytrip'
                                 echo "Push Docker Image to Nexus : Completed"
                             }
