@@ -38,7 +38,7 @@ pipeline {
                         timeout(time: 10, unit: 'MINUTES') {
                             waitForQualityGate abortPipeline: true
                         }
-                        echo 'Quality Gate Check Completed!'
+                        echo 'Quality Gate Check Completed!!'
                     }
                 }
         stage('Code Package') {
